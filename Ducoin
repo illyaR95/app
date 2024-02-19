@@ -1,0 +1,22 @@
+from kivy.app import App
+from kivy.uix.image import Image
+from kivy.uix.floatlayout import FloatLayout
+from kivy.core.window import Window
+import webbrowser
+
+class MyApp(App):
+    def build(self):
+        layout = FloatLayout()
+        image = Image(source='ttt.png', size_hint=(None, None), size=(200, 100),
+                      pos_hint={'center_x': 0.5, 'center_y': 0.5})
+        image.bind(on_touch_down=self.open_browser)
+        layout.add_widget(image)
+        return layout
+
+    def open_browser(self, instance, touch):
+        if instance.collide_point(*touch.pos):
+            webbrowser.open('https://wallet.duinocoin.com/')
+
+if __name__ == '__main__':
+    Window.clearcolor = (0, 0, 0, 1)  # Встановлюємо чорний колір фону
+    MyApp().run()
